@@ -1,0 +1,389 @@
+body {
+	margin: 0;
+	padding: 0;
+    background: #FFFFFF;
+	overflow: hidden;
+}
+
+#wrapper {
+	position: fixed;
+	padding: 0;
+	width: 100%;
+	height:100%;
+	
+	overflow: hidden;
+	background: #FFFFFF;
+	display: block;
+}
+
+#centered {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	padding: 0;
+	width: 320px;
+	height:100%;
+	display: none;
+}
+
+#loader{
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	background: #FFFFFF;
+	text-align: center;
+}
+
+#imgLoaderContainer {
+	position: absolute;
+	margin: 50% 50%;
+	width: 32px;
+	height: 32px;
+}
+
+#imgLoader {
+	position: absolute;
+	margin-left: -16px;
+	margin-top: -16px;
+	width: 32px;
+	height: 32px;
+	background: transparent url("../images/loader-black.gif") no-repeat center;
+}
+
+
+#mainBack {
+
+	position: absolute;
+	top: -10px;
+	left : -184px;	
+	
+	width: 335px;
+	height : 131px;
+
+	background-color: transparent;
+	background-image:  url("../images/Main_Full_01.jpg");
+	background-repeat: no-repeat;
+	background-position: 0px 0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+	-webkit-transform-origin: 70% 10%;
+	-webkit-transform:rotate(0deg);
+	
+}
+
+#mainFront {
+	position: absolute;
+	top: -10px;
+	left : -184px;	
+	
+	width: 335px;
+	height : 131px;
+
+	background-color: transparent;
+	background-image:  url("../images/Main_Full_02.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+	
+	-webkit-transform-origin: 70% 10%;
+	-webkit-transform:rotate(0deg);
+	z-index: 100;
+}
+
+#phoneContainer {
+	position: absolute;
+	top: 34px;
+	left: 60px;
+	width: 140px;
+	height: 266px;	
+	background-color: transparent;
+	background-image:  url("../images/Phone_1b.jpg");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-transform-origin: 20px 20px;
+	-webkit-transform:rotate(-15deg);
+	z-index: 10;
+	
+}
+
+#liquide {
+	position: absolute;
+	left: 0px;
+	top: 300px;
+	width: 320px;
+	height: 468px;	
+	background-color: transparent;
+}
+
+#vague {
+	position: absolute;
+	top: 0px;
+	left : -160px;	
+	
+	width: 694px;
+	height : 46px;
+
+	background-color: transparent;
+	background-image:  url("../images/XperiaZ_TestVague_04.jpg");
+	background-repeat: repeat-x;
+	background-position: 0px 0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#vague2 {
+	position: absolute;
+	top: 46px;
+	left : -160px;	
+	
+	width: 694px;
+	height : 46px;
+
+	background-color: transparent;
+	background-image:  url("../images/XperiaZ_TestVague_05.jpg");
+	background-repeat: repeat-x;
+	background-position: 0px 0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+
+#bulles {
+	position: absolute;
+	top: 133px;
+	left : 44px;	
+	
+	width: 232px;
+	height : 233px;
+
+	background-color: transparent;
+	background-image:  url("../images/Drops_Phone.jpg");
+	background-repeat: repeat-y;
+	background-position: 0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+	display: none;
+}
+
+
+#footer {
+	position:absolute;
+	
+	left:0px;
+	bottom: 0px;
+	width: 100%;
+	height: 108px;
+	
+	background-color: transparent;
+	background-image:  url("../images/FooterGris.jpg");
+	background-size: 100% 100%;
+	z-index: 2000;
+}
+
+#logoXperia {
+	position: absolute;
+	top: 8px;
+	left : 57px;	
+	
+	width: 207px;
+	height : 39px;
+
+	background-color: transparent;
+	background-image:  url("../images/LogoXperiaZ.png");
+	background-repeat: no-repeat;
+	background-position: 0,0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+
+
+#bouton {
+	position: absolute;
+	width: 155px;
+	height : 43px;
+
+	top: 49px;
+	left : 82px;	
+
+	background-color: transparent;
+	background-image:  url("../images/Bouton.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+}
+
+#boutonReflet {
+	position: absolute;
+	width: 142px;
+	height : 32px;
+
+	top: 5px;
+	left : 7px;	
+
+	background-color: transparent;
+	background-image:  url("../images/Bouton_Reflet2.png");
+	background-repeat: no-repeat;
+	background-position: -142px 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+}
+
+#mension {
+	position: absolute;
+	width: 320px;
+	height : 18px;
+
+	bottom : 0px;
+	left : 0px;	
+	
+	text-align: center;
+	background-color: transparent;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 10px;
+	height: 18px;
+	line-height: 18px;
+	color: #6c6b6b;
+}
+
+
+#logoSony {
+	position: absolute;
+	top: 90px;
+	right : 10px;	
+	
+	width: 87px;
+	height : 28px;
+
+	background-color: transparent;
+	background-image:  url("../images/LogoSony.png");
+	background-repeat: no-repeat;
+	background-position: 0,0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+
+#osez {
+	position: absolute;
+	width: 90px;
+	height : 50px;
+
+	top : 180px;
+	left : 0px;	
+	
+	text-align: center;
+	background-color: rgba(0,0,0,0);
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 22px;
+	line-height: 50px;
+	color: #313131;
+}
+
+#fleche {
+	position: absolute;
+	top: 230px;
+	left : 30px;	
+	
+	width: 27px;
+	height : 27px;
+
+	background-color: transparent;
+	background-image:  url("../images/Fleche.jpg");
+	background-repeat: no-repeat;
+	background-position: 0,0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}
+
+
+#splash {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 224px;
+	height: 159px;	
+	background-color: transparent;
+	
+	z-index: 11;
+	display: none;
+}
+
+#splash2 {
+	position: absolute;
+	top: -20px;
+	left: -42px;
+	width: 224px;
+	height: 159px;	
+	background-color: transparent;
+	background-image:  url("../images/Splash_Back.jpg");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+	-webkit-transform:rotate(25deg);
+	opacity: 1;
+	z-index: 11;
+
+}
