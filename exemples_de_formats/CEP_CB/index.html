@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Caisse d'Epargne</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="format-detection" content="telephone=no">
+
+<script type="text/javascript">
+
+var _s4mq = _s4mq || [];
+_s4mq.push(['setTrackId', '160-759-1-16-IpigB']);
+_s4mq.push(['trackLanding']);
+
+(function() {
+   var s4mScript = document.createElement('script'); s4mScript.type = 'text/javascript'; s4mScript.async = true;
+   s4mScript.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'eu-adstatic.sam4m.com/analytics/js/pad/s4m.js';
+   var s4mElement = document.getElementsByTagName('script')[0]; s4mElement.parentNode.insertBefore(s4mScript, s4mElement);
+})();
+
+
+var isResize = false;
+var locationFound = false;
+var lat=0, lon=0;
+var mag1,mag2;
+var counter = 0;
+
+var fontSize1 = 26;
+var fontSize2 = 18;
+var fontSize3 = 20;
+var textMargin = 18;
+var textMargin2 = 0;
+var textMargin3 = 20;
+
+
+var map;
+var panel;
+var initialize;
+var calculate;
+var direction;
+var center;
+	
+var dLat = 48.836889;
+var dLon = 2.23959;
+	
+var curPos;
+	
+var destPos = dLat+','+dLon;
+
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPod|iPad/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
+
+if (typeof $ === 'undefined') {
+	$ = function(id){
+		return document.getElementById(id);
+	};
+}
+
+window.addEventListener('load', function(){
+	preload();
+});
+
+function scale( id,x,y) {
+	document.getElementById(id).style.width = parseInt(x*coef)+"px";
+	document.getElementById(id).style.height = parseInt(y*coef)+"px";
+}
+
+function scale2( id,x,y) {
+	document.getElementById(id).style.width = parseInt(x*coef2)+"px";
+	document.getElementById(id).style.height = parseInt(y*coef2)+"px";
+}
+
+function scalePosLT( id,x,y) {
+	document.getElementById(id).style.left = parseInt(x*coef)+"px";
+	document.getElementById(id).style.top = parseInt(y*coef)+"px";
+}
+
+function scalePosLB( id,x,y) {
+	document.getElementById(id).style.left = parseInt(x*coef)+"px";
+	document.getElementById(id).style.bottom = parseInt(y*coef)+"px";
+}
+
+function scalePosRT( id,x,y) {
+	document.getElementById(id).style.right = parseInt(x*coef)+"px";
+	document.getElementById(id).style.top = parseInt(y*coef)+"px";
+}
+
+function centerH(id) {
+	document.getElementById(id).style.left = parseInt((window.innerWidth - document.getElementById(id).offsetWidth) / 2)+"px";
+}
+
+preload = function() {
+		
+		console.log("preload");
+		$('loader').style.width = window.innerWidth+"px";
+		$('loader').style.height = window.innerHeight+"px";		
+		var images = new Array();		
+		
+		images.push('images/CE_adin_header_cb.jpg');
+		images.push('images/CE_bt_rdv.png');
+		images.push('images/CE_bt_call.png');
+		
+		var imagesLoadedNumber = 0;
+		if ( images.length == 0 ) {
+			init();
+		} else {
+			for(var i=0; i<images.length; i++)
+			{
+				var image = new Image();
+				image.onload = function(){
+					imagesLoadedNumber++;
+					console.log("imagesLoadedNumber = "+imagesLoadedNumber);
+					if(imagesLoadedNumber == images.length)
+					{
+						console.log("Loaded");
+						document.getElementById("loader").style.display = "none";
+						init();
+					}
+				}
+				image.onerror = function(){
+					imagesLoadedNumber++;
+					console.log("imagesLoadedNumber = "+imagesLoadedNumber);
+					if(imagesLoadedNumber == images.length)
+					{
+						console.log("Loaded");
+						document.getElementById("loader").style.display = "none";
+						init();
+					}
+				}
+				image.src = images[i];
+			}
+		}
+}
+
+function doLocation() {
+
+	try {
+		_s4mq.push(['trackAction', {name: "clickToGeoloc", callback: function(){ 
+			document.location.href = './geoloc.html';
+		}}]);	
+	} catch (e) {}
+	
+}
+
+function doCall() {
+
+	try {
+		_s4mq.push(['trackAction', {name: "clickToCall", callback: function(){ 
+			document.location.href = 'tel:0969362000';
+		}}]);	
+	} catch (e) {}
+}
+
+function init() {
+
+	 $('loader').style.display = 'none';
+	 $('wrapper').style.display = 'block'; 
+	 resize();
+	 
+}
+
+function resize2() {
+
+	isResize = false;
+	setTimeout( resize, 100);
+}
+
+function resize() {
+
+	if ( !isResize) {
+		isResize = true;
+		coef = 1;
+		coef = window.innerWidth/640;
+		scale('header', 640, 260);
+		
+		
+		$('mesg1').style.width = parseInt( 584 * coef )+"px";
+		$('mesg1').style.fontSize = parseInt( fontSize1 * coef )+"px";
+		$('mesg1').style.top = parseInt($('header').offsetHeight + textMargin*coef  )+"px";
+		centerH('mesg1');
+				
+		$('mesg2').style.width = parseInt( 584 * coef )+"px";
+		$('mesg2').style.fontSize = parseInt( fontSize1 * coef )+"px";
+		$('mesg2').style.top = parseInt($('header').offsetHeight + textMargin*coef +$('mesg1').offsetHeight + textMargin*coef)+"px";
+		centerH('mesg2');
+		
+		$('mesg3').style.width = parseInt( 584 * coef )+"px";
+		$('mesg3').style.fontSize = parseInt( fontSize1 * coef )+"px";
+		$('mesg3').style.top = parseInt($('header').offsetHeight + textMargin*coef +$('mesg1').offsetHeight + textMargin*coef +$('mesg2').offsetHeight + textMargin*coef )+"px";
+		centerH('mesg3');
+		
+		
+		scale('btnCall', 584,108);
+		$('btnCall').style.top = parseInt($('header').offsetHeight + textMargin*coef +$('mesg1').offsetHeight + textMargin*coef +$('mesg2').offsetHeight + textMargin*coef +$('mesg3').offsetHeight + textMargin3*coef)+"px";
+		centerH('btnCall');
+		
+		scale('btnRdv', 584,108);
+		$('btnRdv').style.top = parseInt($('header').offsetHeight + textMargin*coef +$('mesg1').offsetHeight + textMargin*coef +$('mesg2').offsetHeight + textMargin*coef +$('mesg3').offsetHeight + textMargin3*coef +$('btnCall').offsetHeight + textMargin3*coef)+"px";
+		centerH('btnRdv');
+		
+		
+		$('mesg8').style.width = parseInt( 584 * coef )+"px";
+		$('mesg8').style.fontSize = parseInt( fontSize3 * coef )+"px";
+		$('mesg8').style.top = parseInt($('header').offsetHeight + textMargin*coef +$('mesg1').offsetHeight + textMargin*coef +$('mesg2').offsetHeight + textMargin*coef +$('mesg3').offsetHeight + textMargin3*coef +$('btnCall').offsetHeight + textMargin3*coef +$('btnRdv').offsetHeight + textMargin3*coef)+"px";
+		centerH('mesg8');
+
+		
+		var allSize = 1024*coef;
+	
+		if ( window.innerHeight > allSize) {
+			allSize = window.innerHeight;
+		}
+		
+		$('wrapper').style.height= allSize+'px';
+		
+		//window.scrollTo(0,1);	
+	}
+	setTimeout( function() { isResize = false; } , 200);
+}
+
+
+</script>
+<style>
+
+body {
+	margin: 0;
+	padding: 0;
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+	color:grey;
+}
+
+#loader{
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background: #FFFFFF;
+	text-align: center;
+}
+
+#imgLoaderContainer {
+	position: absolute;
+	margin: 50% 50%;
+	width: 32px;
+	height: 32px;
+}
+
+#imgLoader {
+	position: absolute;
+	margin-left: -16px;
+	margin-top: -16px;
+	width: 32px;
+	height: 32px;
+	background: transparent url("images/loader-black.gif") no-repeat center;
+}
+
+#wrapper {
+	position: absolute;
+	padding: 0;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	overflow: hidden;
+	display: none;
+}
+
+#mesg1, #mesg3 {
+	position: absolute;
+	color: #3b3b3b;
+}
+
+#mesg2 {
+	position: absolute;
+	font-weight: bold;
+	color: #e2001a;
+}
+
+#mesg5  {
+	position: absolute;
+	color: #939393;
+}
+
+#mesg6, #mesg7  {
+	position: absolute;
+	font-weight: bold;
+	color: #3b3b3b;
+}
+
+#mesg8  {
+	position: absolute;
+	color: #3b3b3b;
+}
+
+#btnCall {
+
+	position: absolute;
+	width: 584px;
+	height: 108px;
+		
+	background-image:  url("images/CE_bt_call.png");
+	background-repeat: no-repeat;
+	background-position: 0 0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#btnRdv {
+
+	position: absolute;
+	width: 584px;
+	height: 108px;
+		
+	background-image:  url("images/CE_bt_rdv.png");
+	background-repeat: no-repeat;
+	background-position: 0 0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#header {
+
+	position: absolute;
+	width: 640px;
+	height: 260px;
+		
+	background-image:  url("images/CE_adin_header_cb.jpg");
+	background-repeat: no-repeat;
+	background-position: 0 0,0 0;
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+</style>
+</head>
+<body onResize="resize();">	
+	<div id="wrapper">
+		<div id="header"></div>
+		<div id="mesg1">À la caisse d’Epargne, si vous avez entre 16 et 25 ans, votre carte bancaire est gratuite pendant un an pour toute souscription avant le 31/10/14*.</div>
+		<div id="mesg2">Vous souhaitez bénéficier de cette offre ?</div>
+		<div id="mesg3">Contactez directement un conseiller par téléphone ou rendez-vous dans l’agence la plus proche.</div>
+
+		<div id="btnCall" onClick="doCall();"></div>
+		<div id="btnRdv" onClick="doLocation();"></div>
+
+   		<div id="mesg8">*Offre réservée aux 16-25 ans souscripteurs d’un forfait Bouquet Liberté ou d’un forfait 16-17 ce forfait sera tarifé les années suivantes. Voir conditions dans votre caisse d’Epargne régionale.</div>
+    </div>
+    <div id="loader">
+		<div id="imgLoaderContainer" >
+			<div id="imgLoader" ></div>
+		</div>
+	</div>
+</body>
+</html>
