@@ -1,10 +1,10 @@
-var mc, _;
+var acf, _;
 (function() {
 
-	mc = _ = function(selector) {
-		return new Mc(selector);
+	acf = _ = function(selector) {
+		return new Acf(selector);
 	};
-	var Mc = function(selector) {
+	var Acf = function(selector) {
 		var sel = document.querySelectorAll(selector);
 		for (var i = 0; i < sel.length; i++) {
             this[i] = sel[i];
@@ -13,7 +13,7 @@ var mc, _;
 		return this;
 	};
 
-	mc.fn = Mc.prototype = {
+	acf.fn = Acf.prototype = {
 		hide: function() {
 			for (var i = 0; i < this.length; i++) {
                 this[i].style.display = 'none';
@@ -36,27 +36,27 @@ var mc, _;
 
 })();
 
-mc.fn.addClass = function(value) {
+acf.fn.addClass = function(value) {
 	for (var i = 0; i < this.length; i++) {
 		var listClass = this[i].className;
 		this[i].className = listClass + " " + value; 
     }
     return this;
 };
-mc.fn.removeClass = function(value) {
+acf.fn.removeClass = function(value) {
 	for (var i = 0; i < this.length; i++) {
 		var listClass = " " + this[i].className + " ";
 		this[i].className = listClass.replace(" "+value+" ", "").replace(/^\s+/, "").replace(/\s+$/, ""); 
     }
     return this;
 };
-mc.fn.on = function(evt, callback) {
+acf.fn.on = function(evt, callback) {
 	for (var i = 0; i < this.length; i++) {
 		this[i].addEventListener(evt, callback, false);
     }
 	return this;
 };
-mc.fn.preload = function(list, callback) {
+acf.fn.preload = function(list, callback) {
 	var imageLoaded = 0, listLength = list.length;
 	if (listLength == 0) return callback();
 	for (var i = 0; i < listLength; i++) {
@@ -64,7 +64,7 @@ mc.fn.preload = function(list, callback) {
 			pipe = function() {
 				imageLoaded++;
 				if (imageLoaded == listLength) {
-					mc('#loader').hide();
+					acf('#loader').hide();
 					callback();
 				}
 			};
@@ -73,16 +73,7 @@ mc.fn.preload = function(list, callback) {
 		image.src = images[i];
 	}
 };
-/* 
-	params = {
-		coef : 1,
-		x : 100,
-		y : -30,
-		pos : ['left', 'top'] <-- optional
-	}
-	usage : _('.monElement').scale({coef:1, x:50, y:20})
- */
-mc.fn.scale = function(params) {
+acf.fn.scale = function(params) {
 	if (!params.coef && !params.x && !params.y) return this;
 	for (var i = 0; i < this.length; i++) {
 		var that = this[i];
