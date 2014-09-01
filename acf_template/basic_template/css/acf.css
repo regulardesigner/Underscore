@@ -1,7 +1,17 @@
-/* html5doctor.com Reset v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/) - http://cssreset.com */
+/*
+	0 - reset css
+	1 - loader
+	2 - helpers
+	3 - layout
+	4 - buttons
+	5 - responsive images
+	6 - motions
+*/
+
+/* 0 - html5doctor.com Reset v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/) - http://cssreset.com */
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
 
-/* loader */
+/* 1 - loader */
 #acf-loader{
 	position:absolute;
 	top:0;
@@ -37,6 +47,23 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 }
 
+/* 2 - helpers */
+.hide{display:none;}
+.visible{display:block;}
+
+/* 3 - layout */
+#acf-main{
+	background-color:black;
+}
+
+/* 4 - buttons */
+.acf-btn-wide{display:block;}
+
+/* 5 - responsive images */
+img{}
+
+/* 6 - motion */
+/* loader css motion */
 @-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}
 @keyframes rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
 
@@ -54,20 +81,3 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
     -webkit-transform: scale(1.0);
   }
 }
-
-/* helpers */
-.hide{display:none;}
-.visible{display:block;}
-
-/* layout */
-#acf-main{
-	background-color:black;
-}
-
-/* button */
-.acf-btn-wide{display:block;}
-
-/* responsive images */
-img{}
-
-/* motion */
