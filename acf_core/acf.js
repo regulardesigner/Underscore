@@ -5,7 +5,7 @@ var acf, _;
 		return new Acf(selector);
 	};
 	var Acf = function(selector) {
-		if (selector == window || selector == document) {
+		if (selector == window || selector == document || selector.nodeType) {
 			this[0] = selector;
 			this.length = 1;
 			return this;
@@ -47,7 +47,7 @@ var acf, _;
 acf.fn.addClass = function(value, callback) {
 	for (var i = 0; i < this.length; i++) {
 		var listClass = this[i].className;
-		this[i].className = listClass + " " + value; 
+		if (listClass.indexOf(value) == -1) this[i].className = listClass + " " + value; 
     }
     if (callback) callback();
     return this;
@@ -62,7 +62,9 @@ acf.fn.removeClass = function(value, callback) {
 };
 acf.fn.on = function(evt, callback) {
 	for (var i = 0; i < this.length; i++) {
-		this[i].addEventListener(evt, callback, false);
+		this[i].addEventListener(evt, function(e) {
+			callback.apply(this, [e]);
+		});
     }
 	return this;
 };
@@ -77,7 +79,7 @@ acf.fn.preload = function(list, callback) {
 					imageLoaded++;
 					if (imageLoaded == listLength) {
 						for (var i = 0; i < this.length; i++) {
-							this[i].hide();
+							_(this[i]).hide();
 					    }
 						callback();
 					}
