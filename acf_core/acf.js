@@ -5,6 +5,11 @@ var acf, _;
 		return new Acf(selector);
 	};
 	var Acf = function(selector) {
+		if (selector == window || selector == document) {
+			this[0] = selector;
+			this.length = 1;
+			return this;
+		}
 		var sel = document.querySelectorAll(selector);
 		for (var i = 0; i < sel.length; i++) {
             this[i] = sel[i];
@@ -14,40 +19,45 @@ var acf, _;
 	};
 
 	acf.fn = Acf.prototype = {
-		hide: function() {
+		hide: function(callback) {
 			for (var i = 0; i < this.length; i++) {
                 this[i].style.display = 'none';
             }
+            if (callback) callback();
             return this;
 		},
-		show: function() {
+		show: function(callback) {
 			for (var i = 0; i < this.length; i++) {
                 this[i].style.display = 'block';
             }
+            if (callback) callback();
             return this;
 		},
-        remove: function() {
+        remove: function(callback) {
             for (var i = 0; i < this.length; i++) {
                 this[i].parentNode.removeChild(this[i]);
             }
+            if (callback) callback();
             return this;
         }
 	};
 
 })();
 
-acf.fn.addClass = function(value) {
+acf.fn.addClass = function(value, callback) {
 	for (var i = 0; i < this.length; i++) {
 		var listClass = this[i].className;
 		this[i].className = listClass + " " + value; 
     }
+    if (callback) callback();
     return this;
 };
-acf.fn.removeClass = function(value) {
+acf.fn.removeClass = function(value, callback) {
 	for (var i = 0; i < this.length; i++) {
 		var listClass = " " + this[i].className + " ";
 		this[i].className = listClass.replace(" "+value+" ", "").replace(/^\s+/, "").replace(/\s+$/, ""); 
     }
+    if (callback) callback();
     return this;
 };
 acf.fn.on = function(evt, callback) {
@@ -57,28 +67,33 @@ acf.fn.on = function(evt, callback) {
 	return this;
 };
 acf.fn.preload = function(list, callback) {
-	var imageLoaded = 0, listLength = list.length;
-	if (listLength == 0) return callback();
-	for (var i = 0; i < listLength; i++) {
-		var image = new Image(),
-			pipe = function() {
-				imageLoaded++;
-				if (imageLoaded == listLength) {
-					acf('#loader').hide();
-					callback();
-				}
-			};
-		image.onload = pipe;
-		image.onerror = pipe;
-		image.src = images[i];
+	var imageLoaded = 0, listLength = list.length, callback = "undefined" != typeof callback ? callback : function() {};
+	if (listLength == 0) {
+		callback();
+	} else {
+		for (var i = 0; i < listLength; i++) {
+			var image = new Image(),
+				pipe = function() {
+					imageLoaded++;
+					if (imageLoaded == listLength) {
+						for (var i = 0; i < this.length; i++) {
+							this[i].hide();
+					    }
+						callback();
+					}
+				};
+			image.onload = pipe;
+			image.onerror = pipe;
+			image.src = images[i];
+		}
 	}
+	return this;
 };
-acf.fn.scale = function(params) {
+acf.fn.scale = function(params, callback) {
 	if (!params.coef && !params.x && !params.y) return this;
 	for (var i = 0; i < this.length; i++) {
 		var that = this[i];
 		if (params.pos) {
-			// ex : params.pos = ['left', 'top']
 			that.style[params.pos[0]] = parseInt(params.x*params.coef)+'px';
 			that.style[params.pos[1]] = parseInt(params.y*params.coef)+'px';
 		} else {
@@ -86,5 +101,6 @@ acf.fn.scale = function(params) {
 			that.style.height = parseInt(params.y*params.coef)+'px';
 		}
 	}
+	if (callback) callback();
 	return this;
 };
