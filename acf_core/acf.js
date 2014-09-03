@@ -64,7 +64,7 @@ acf.fn.preload = function(list, callback) {
 			pipe = function() {
 				imageLoaded++;
 				if (imageLoaded == listLength) {
-					acf('#loader').hide();
+					acf('#acf-loader').hide();
 					callback();
 				}
 			};
@@ -73,6 +73,15 @@ acf.fn.preload = function(list, callback) {
 		image.src = images[i];
 	}
 };
+/* 
+	params = {
+		coef : 1,
+		x : 100,
+		y : -30,
+		pos : ['left', 'top'] <-- optional
+	}
+	usage : acf('.monElement').scale({coef:1, x:50, y:20})
+ */
 acf.fn.scale = function(params) {
 	if (!params.coef && !params.x && !params.y) return this;
 	for (var i = 0; i < this.length; i++) {
