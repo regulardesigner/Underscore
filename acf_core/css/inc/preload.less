@@ -1,0 +1,51 @@
+/* 1 - preloader */
+#acf-loader{
+	position:absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background-color:black;
+	/*line-height:470px;*/
+	text-align:center;
+	span{
+		display:block;
+		-webkit-animation: bounce 3.0s infinite ease-in-out;
+		animation: bounce 3.0s infinite ease-in-out;
+	}
+}
+#spiner{
+	position:relative;
+	margin:0 auto;
+	height:35px;
+	width:35px;
+	border-top:4px solid white;
+	border-left:4px solid orange;
+	border-bottom:4px solid white;
+	border-right:4px solid orange;
+	border-radius:100px;
+	display:inline-block;
+	vertical-align:middle;
+	line-height:normal;
+	-webkit-animation: rotate 0.8s infinite linear;
+	animation: rotate 0.8s infinite linear;
+}
+/* loader css motion */
+@-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}
+
+@keyframes rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes bounce {
+  0%, 100% { -webkit-transform: scale(0.9) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bounce {
+  0%, 100% { 
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
