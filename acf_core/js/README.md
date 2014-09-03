@@ -86,3 +86,29 @@ $("#myElementToScale").scale({
 	// do something ...
 });
 ```
+
+### 6. Timeline
+
+```
+// create a reference of the timeline
+var myTimeline = _.timeline();
+
+// pass params in the reference when you want to start the timeline execution
+myTimeline({
+	interval : 1000, // 1000 = 1 second
+	step : {
+		"2" : function() {
+			// do something after 2 seconds
+		}, 
+		"3" : function() {
+			// do something after 3 seconds
+		}, 
+		"8" : function() {
+			// do something after 8 seconds
+		}
+	}
+});
+
+// you can stop the timeline whenever you want with ...
+myTimeline("stop");
+```

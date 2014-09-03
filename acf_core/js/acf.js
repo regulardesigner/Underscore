@@ -106,3 +106,18 @@ acf.fn.scale = function(params, callback) {
 	if (callback) callback();
 	return this;
 };
+acf.timeline = function() {
+	var timer;
+	return function(params) {
+		if (!params) return;
+		if (("string" == typeof params) && (params == "stop")) return clearInterval(timer);
+		var interval = params.interval || 1000,
+			step = params.step || {},
+			time = 0; 
+		timer = window.setInterval(function() {
+			time++;
+			var checkIt = step[""+time];
+			if (checkIt) checkIt();
+		}, interval);
+	};
+};
