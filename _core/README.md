@@ -6,6 +6,7 @@ Usage
 
 ### 1. Retrieve element from DOM
 
+```
 _("#myElement");
 ```
 
