@@ -1,18 +1,11 @@
-adcreativeframework
+Underscore
 ===================
-
-A little framework to building html5 ads
 
 Usage
 -----
 
 ### 1. Retrieve element from DOM
 
-```
-acf("#myElement");
-```
-or
-```
 _("#myElement");
 ```
 
@@ -63,14 +56,14 @@ _("#myLoader").preload(listImgs, function() {
 
 ```
 // scale dimensions
-$("#myElementToScale").scale({
+_("#myElementToScale").scale({
 	coef: 1,
 	x : 100,
 	y : 30
 });
 
 // scale positioning
-$("#myElementToScale").scale({
+_("#myElementToScale").scale({
 	coef: 1,
 	x : 100,
 	y : 30,
@@ -78,7 +71,7 @@ $("#myElementToScale").scale({
 });
 
 // scale with a callback
-$("#myElementToScale").scale({
+_("#myElementToScale").scale({
 	coef: 1,
 	x : 100,
 	y : 30
