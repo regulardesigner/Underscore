@@ -1,10 +1,10 @@
-var acf, _;
+var _;
 (function() {
 
-	acf = _ = function(selector) {
-		return new Acf(selector);
+	_ = function(selector) {
+		return new ndrscr(selector);
 	};
-	var Acf = function(selector) {
+	var ndrscr = function(selector) {
 		if (selector == window || selector == document || selector.nodeType) {
 			this[0] = selector;
 			this.length = 1;
@@ -18,7 +18,7 @@ var acf, _;
 		return this;
 	};
 
-	acf.fn = Acf.prototype = {
+	_.fn = ndrscr.prototype = {
 		hide: function(callback) {
 			for (var i = 0; i < this.length; i++) {
                 this[i].style.display = 'none';
@@ -44,7 +44,7 @@ var acf, _;
 
 })();
 
-acf.fn.addClass = function(value, callback) {
+_.fn.addClass = function(value, callback) {
 	for (var i = 0; i < this.length; i++) {
 		var listClass = this[i].className;
 		if (listClass.indexOf(value) == -1) this[i].className = listClass + " " + value; 
@@ -52,7 +52,7 @@ acf.fn.addClass = function(value, callback) {
     if (callback) callback();
     return this;
 };
-acf.fn.removeClass = function(value, callback) {
+_.fn.removeClass = function(value, callback) {
 	for (var i = 0; i < this.length; i++) {
 		var listClass = " " + this[i].className + " ";
 		this[i].className = listClass.replace(" "+value+" ", "").replace(/^\s+/, "").replace(/\s+$/, ""); 
@@ -60,7 +60,7 @@ acf.fn.removeClass = function(value, callback) {
     if (callback) callback();
     return this;
 };
-acf.fn.on = function(evt, callback) {
+_.fn.on = function(evt, callback) {
 	for (var i = 0; i < this.length; i++) {
 		this[i].addEventListener(evt, function(e) {
 			callback.apply(this, [e]);
@@ -68,7 +68,7 @@ acf.fn.on = function(evt, callback) {
     }
 	return this;
 };
-acf.fn.preload = function(list, callback) {
+_.fn.preload = function(list, callback) {
 	var imageLoaded = 0, listLength = list.length, callback = "undefined" != typeof callback ? callback : function() {};
 	if (listLength == 0) {
 		callback();
@@ -91,22 +91,8 @@ acf.fn.preload = function(list, callback) {
 	}
 	return this;
 };
-acf.fn.scale = function(params, callback) {
-	if (!params.coef && !params.x && !params.y) return this;
-	for (var i = 0; i < this.length; i++) {
-		var that = this[i];
-		if (params.pos) {
-			that.style[params.pos[0]] = parseInt(params.x*params.coef)+'px';
-			that.style[params.pos[1]] = parseInt(params.y*params.coef)+'px';
-		} else {
-			that.style.width = parseInt(params.x*params.coef)+'px';
-			that.style.height = parseInt(params.y*params.coef)+'px';
-		}
-	}
-	if (callback) callback();
-	return this;
-};
-acf.timeline = function() {
+
+_.timeline = function() {
 	var timer;
 	return function(params) {
 		if (!params) return;

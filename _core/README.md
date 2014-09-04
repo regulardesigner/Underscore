@@ -53,35 +53,8 @@ _("#myLoader").preload(listImgs, function() {
 });
 ```
 
-### 5. Scale an element
 
-```
-// scale dimensions
-_("#myElementToScale").scale({
-	coef: 1,
-	x : 100,
-	y : 30
-});
-
-// scale positioning
-_("#myElementToScale").scale({
-	coef: 1,
-	x : 100,
-	y : 30,
-	pos : ["left", "top"]
-});
-
-// scale with a callback
-_("#myElementToScale").scale({
-	coef: 1,
-	x : 100,
-	y : 30
-}, function() {
-	// do something ...
-});
-```
-
-### 6. Timeline
+### 5. Timeline
 
 ```
 // create a reference of the timeline
